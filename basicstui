@@ -1,0 +1,10 @@
+import streamlit as st
+st.title("Deal Probability Analyzer")
+symbol = st.text_input("Symbol", "")
+deal_price = st.number_input("Deal Price", value=1.18)
+fallback = st.number_input("Fallback Price", value=0.70)
+if st.button("Run Model"):
+    p = implied_p(last_price, deal_price, fallback)
+    st.write("Implied Probability:", p)
+    terminal = monte_carlo_binary(p, deal_price, fallback)
+    st.histogram(terminal)
